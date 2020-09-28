@@ -1,6 +1,9 @@
 library(readr)
 myData <- read_delim("data/household_power_consumption.txt", delim = ";", col_names = T)
-par(mfrow = c(1,3), mar = c(5,4,2,1))
-hist(myData$Sub_metering_1, col = "green", xlab = "SubMetering 1")
-hist(myData$Sub_metering_2, col = "blue", xlab = "SubMetering 2")
-hist(myData$Sub_metering_3, col = "red", xlab = "SubMetering 3")
+myDatafilter <- subset(myData, Date %in% c("1/2/2007", "2/2/2007"))
+myDatafilter$newdata <- as.POSIXct(paste(as.Date(myDatafilter$Date), myDatafilter$Time))
+with(myDatafilter, plot(myDatafilter$newdata, myDatafilter$Global_active_power))
+myDatafilter$Date <- as.Date(myDatafilter$Date, format = "%d/%m/%Y")
+myDatafilter$newdata <- as.POSIXct(paste(as.Date(myDatafilter$Date), myDatafilter$Time))
+
+with(myDatafilter, plot(myDatafilter$newdata, myDatafilter$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)", main = NULL))
