@@ -1,0 +1,5 @@
+library(readr)
+myData <- read_delim("data/household_power_consumption.txt", delim = ";", col_names = T)
+par(mfrow = c(2,1), mar = c(4,4,2,1))
+> hist(subset(myData, Voltage >240)$Global_intensity, col = "blue", xlab = "Global intensity over Voltage mean")
+> hist(subset(myData, Voltage <= 240)$Global_intensity, col = "green", xlab = "Global intensity under Voltage mean")
