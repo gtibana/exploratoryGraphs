@@ -1,6 +1,8 @@
 library(readr)
 myData <- read_delim("data/household_power_consumption.txt", delim = ";", col_names = T)
 
+op <- par(cex = 0.25)
+
 par(mfrow=c(2,2), mar=c(5,4,2,1))
 
 plot(myDatafilter$newdata, myDatafilter$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)", main = NULL)
